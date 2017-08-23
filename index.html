@@ -1,0 +1,40 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>A Tetris implementation from scratch</title>
+  <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+  <script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
+  <script language="javascript" type="text/javascript" src="libraries/p5.dom.js"></script>
+  <script language="javascript" type="text/javascript" src="libraries/p5.sound.js"></script>
+  <script language="javascript" type="text/javascript" src="sketch.js"></script>
+  <script language="javascript" type="text/javascript" src="tile.js"></script>
+  <script language="javascript" type="text/javascript" src="block.js"></script>
+  <script language="javascript" type="text/javascript" src="blocks/i.js"></script>
+  <script language="javascript" type="text/javascript" src="blocks/j.js"></script>
+  <script language="javascript" type="text/javascript" src="blocks/l.js"></script>
+  <script language="javascript" type="text/javascript" src="blocks/o.js"></script>
+  <script language="javascript" type="text/javascript" src="blocks/s.js"></script>
+  <script language="javascript" type="text/javascript" src="blocks/t.js"></script>
+  <script language="javascript" type="text/javascript" src="blocks/z.js"></script>
+
+  <!-- this line removes any default padding and style. you might only need one of these values set. -->
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+  <div class="container">
+    <div id="score" class="text-center">Lines: <span id="score-text">0</span></div>
+    <div id="canvas-holder" class="text-center">
+    </div>
+  </div>
+</body>
+
+</html>

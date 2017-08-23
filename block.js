@@ -138,6 +138,9 @@ class Block {
         this.commitToGrid();
         Tile.checkLines();
         $("#score-text").html(score)
-        active = new I(2, 5);
+        active = generator.shift();
+        if (generator.length == 0){
+            generator = arrayShuffle([new I(0,3), new J(0,3), new L(0,3), new O(0,4), new S(0,3), new T(0,3), new Z(0,3)]);
+        }
     }
 }

@@ -4,8 +4,8 @@ var w = 40;
 //var frames = 5;
 var score = 0;
 var grid = new Array(rows);
-//var generator = 
 
+var generator;
 var active;
 var myInterval;
 
@@ -16,7 +16,8 @@ function arrayShuffle(a) {
         x = a[i - 1];
         a[i - 1] = a[j];
         a[j] = x;
-    }
+	}
+	return a;
 }
 
 function setup() {
@@ -33,12 +34,9 @@ function setup() {
 			grid[i][j] = new Tile();
 		}
 	}
-	active = new J(2, 1);
-
-	grid[19][1].full = true;
-	grid[19][2].full = true;
-	grid[19][0].full = true;
-	grid[19][5].full = true;
+	generator = arrayShuffle([new I(0,3), new J(0,3), new L(0,3), new O(0,4), new S(0,3), new T(0,3), new Z(0,3)]);
+	console.log(generator);
+	active = generator.shift();
 
 	myInterval = setInterval(gameLoop, 500);
 }

@@ -50,9 +50,9 @@ class Block {
         }
     }
 
-    autoDrop(){
+    autoDrop() {
         var allowedMove = true;
-        while(allowedMove){
+        while (allowedMove) {
             var allowedMove = this.checkBelow();
             this.moveY(1);
         }
@@ -150,14 +150,37 @@ class Block {
 
         //generate new Piece (make into function)
         active = generator.shift();
-        if (generator.length == 0){
-            generator = arrayShuffle([new I(0,3), new J(0,3), new L(0,3), new O(0,4), new S(0,3), new T(0,3), new Z(0,3)]);
+        if (generator.length == 0) {
+            generator = arrayShuffle([new I(0, 3), new J(0, 3), new L(0, 3), new O(0, 4), new S(0, 3), new T(0, 3), new Z(0, 3)]);
         }
 
         //check GameOver (make into function)
-        if (!active.checkCurrent()){
+        if (!active.checkCurrent()) {
             clearInterval(myInterval);
             $("#score").html($("#score").html() + " --- GAME OVER!")
+        }
+
+        //reset Save
+        saveUsed = false;
+    }
+
+    save() {
+        if (!saveUsed) {
+            if (saved) {
+                var temp = active;
+                active = saved;
+                saved = temp;
+                active.row = 0;
+                active.col = 3;
+            } else {
+                saved = active;
+                //generate new Piece (make into function)
+                active = generator.shift();
+                if (generator.length == 0) {
+                    generator = arrayShuffle([new I(0, 3), new J(0, 3), new L(0, 3), new O(0, 4), new S(0, 3), new T(0, 3), new Z(0, 3)]);
+                }
+            }
+            saveUsed = true;
         }
     }
 }

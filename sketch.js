@@ -9,6 +9,8 @@ var grid = new Array(rows);
 
 var generator;
 var active;
+var saved;
+var saveUsed = false;
 var myInterval;
 
 function arrayShuffle(a) {
@@ -44,7 +46,7 @@ function setup() {
 }
 
 function draw() {
-	background(21);
+	background(31);
 
 	//draw grid
 	stroke(100);
@@ -60,6 +62,9 @@ function draw() {
 	}
 
 	//create next box
+	textSize(25);
+	fill(100);
+	text("Next", cols * w + 1 + nextW / 2 + nextW / 4, 3 * w - 5);
 	noFill();
 	rect(cols * w + 1 + nextW / 2, 3 * w, nextW, nextH);
 	next = generator[0];
@@ -74,6 +79,23 @@ function draw() {
 		}
 	}
 
+	//create saved box
+	fill(100);
+	text("Hold", cols * w + 1 + nextW / 2 + nextW / 4, 9 * w - 5);
+	noFill();
+	rect(cols * w + 1 + nextW / 2, 9 * w, nextW, nextH);
+	if (saved) {
+		for (var i = 0; i < saved.shape.length; i++) {
+			for (var j = 0; j < saved.shape[i].length; j++) {
+				if (saved.shape[i][j] != 0) {
+					fill(color(saved.color));
+					smallW = nextW * 0.9 / saved.shape.length;
+					smallH = nextH * 0.9 / saved.shape[i].length;
+					rect(cols * w + 1 + nextW / 2 + nextW * 0.05 + j * smallW, 9 * w + nextH * 0.05 + i * smallH, smallW, smallH);
+				}
+			}
+		}
+	}
 
 	active.show();
 
@@ -90,7 +112,10 @@ function keyPressed() {
 		active.moveY();
 	} else if (keyCode === 32) {
 		active.autoDrop();
+	} else if (keyCode === 67) {
+		active.save();
 	}
+
 }
 
 function gameLoop() {

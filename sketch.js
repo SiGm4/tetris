@@ -70,6 +70,8 @@ function keyPressed() {
 		active.rotate();
 	} else if(keyCode === DOWN_ARROW){
 		active.moveY();
+	} else if(keyCode === 32){
+		active.autoDrop();
 	}
 }
 

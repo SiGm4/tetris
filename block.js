@@ -50,6 +50,14 @@ class Block {
         }
     }
 
+    autoDrop(){
+        var allowedMove = true;
+        while(allowedMove){
+            var allowedMove = this.checkBelow();
+            this.moveY(1);
+        }
+    }
+
     checkRotate() {
         var allowedMove = true;
         var sideCorrection = false;
@@ -62,13 +70,14 @@ class Block {
                     if (actuali >= rows) {
                         allowedMove = false;
                     }
-                    // checking for other block
+                    // checking for sides
                     else if (actualj >= cols) {
                         sideCorrection = -1;
                     }
                     else if (actualj < 0) {
                         sideCorrection = 1;
                     }
+                    // checking for other block
                     else if (grid[actuali][actualj].full) {
                         allowedMove = false;
                     }

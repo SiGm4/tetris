@@ -2,7 +2,7 @@ class Block {
     constructor(i, j) {
         this.row = i;
         this.col = j;
-        this.w = 40;
+        this.w = w;
     }
 
     show() {
@@ -23,10 +23,10 @@ class Block {
         this.rotation = this.rotation == this.rotations.length - 1 ? 0 : this.rotation + 1;
         this.shape = this.rotations[this.rotation];
 
-        var checkResult = this.checkRotate();
+        var checkResult = this.checkCurrent();
         while (typeof checkResult === "number") {
             this.col += checkResult;
-            checkResult = this.checkRotate();
+            checkResult = this.checkCurrent();
         }
         if (!checkResult) {
             this.shape = savedShape;
@@ -58,7 +58,7 @@ class Block {
         }
     }
 
-    checkRotate() {
+    checkCurrent() {
         var allowedMove = true;
         var sideCorrection = false;
         for (var i = 0; i < this.shape.length; i++) {
@@ -147,9 +147,17 @@ class Block {
         this.commitToGrid();
         Tile.checkLines();
         $("#score-text").html(score)
+
+        //generate new Piece (make into function)
         active = generator.shift();
         if (generator.length == 0){
             generator = arrayShuffle([new I(0,3), new J(0,3), new L(0,3), new O(0,4), new S(0,3), new T(0,3), new Z(0,3)]);
+        }
+
+        //check GameOver (make into function)
+        if (!active.checkCurrent()){
+            clearInterval(myInterval);
+            $("#score").html($("#score").html() + " --- GAME OVER!")
         }
     }
 }
